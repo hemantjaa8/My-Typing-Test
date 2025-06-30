@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Test Clone</title>
+
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/keyboard.css">
+    <link rel="stylesheet" href="style/typingResult.css">
+    <!-- Vue Js -->
+    <script src="https://unpkg.com/vue@3"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #2c2c2c;
+        color: white;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 25px;
+        color: #FFD600; /* Yellow color for "My Typing Speed" */
+        font-weight: bold;
+        text-shadow: 1px 2px 6px #000, 0px 1px 1px #fff4;
+        letter-spacing: 1.4px;
+        font-size: 2.5rem;
+    }
+     h5 {
+        text-align: center;
+        margin-top: 0px;
+        margin-bottom: -20px;
+        color: #e7ebe3; /* "Help and Support- Instagram Id :hemant.chaudhary.fazilpur, Email : hemantchaudharyfz@gmail.com " */
+        font-weight: bold;
+        text-shadow: 1px 2px 6px #000, 0px 1px 1px #fff4;
+        letter-spacing: 1.4px;
+        font-size: 0.8rem;
+    }
+    /* Container for buttons (dark box) */
+    .button-container {
+        text-align: center;
+        margin-top: 30px;
+        background-color: #222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        padding: 5px;
+        height: 50px;
+        width: 33%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .button-container button {
+        font-size: 16px;
+        padding: 12px 25px;
+        margin: 0 2px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        border-radius: 8px;
+        font-weight: bold;
+        background-color: transparent;
+        color: white;
+        transition: all 0.3s ease;
+        height: 40px;
+    }
+    .button-container button:hover {
+        opacity: 0.8;
+    }
+    .button-30, .button-60, .button-refresh {
+        background-color: transparent;
+    }
+    .button-container button:active {
+        transform: scale(0.98);
+    }
+
+    /* Contact info at the very bottom, scrollable */
+    .contact-section {
+        width: 100%;
+        max-width: 600px;
+        margin: 48px auto 24px auto;
+        background: #232834;
+        border-radius: 10px;
+        color: #e6e6e6;
+        text-align: center;
+        font-size: 1.1rem;
+        letter-spacing: 0.1px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+        padding: 20px 0 14px 0;
+    }
+    .contact-section a {
+        color: #FFD600;
+        text-decoration: none;
+        margin: 0 8px;
+        font-weight: 600;
+        transition: color 0.2s;
+        word-break: break-all;
+    }
+    .contact-section a:hover {
+        color: #f7b731;
+        text-decoration: underline;
+    }
+    .contact-section .icon {
+        vertical-align: middle;
+        font-size: 1.1em;
+        margin-right: 4px;
+    }
+    .contact-section strong {
+        color: #fff;
+        font-size: 1.14em;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>My Typing Speed</h1>
+    <h5>Help and Support- Instagram Id :hemant.chaudhary.fazilpur, Email : hemantchaudharyfz@gmail.com</h5>
+
+    <!-- Dark box container for buttons -->
+    <div class="button-container">
+        <button class="button-30" onclick="setTime(30)">30 Sec</button>
+        <button class="button-60" onclick="setTime(60)">60 Sec</button>
+        <button class="button-refresh" onclick="location.reload()">Refresh</button>
+    </div>
+
+    <div id="app">
+        <typing-test-result v-show="result_test_component" :score="typing_test_score" :scorelist="typing_chart_score"></typing-test-result>
+        <typing-keyboard v-show="typing_test_component"></typing-keyboard>
+        <typing-test-component v-show="typing_test_component" @show-result="showHideComponents"></typing-test-component>
+    </div>
+
+    <!-- Contact Info (Scroll Down To View) -->
+    <div class="contact-section">
+        <div>
+            <strong>Contact Support:</strong>
+            <br>
+            <span>
+                <span class="icon material-symbols-outlined">mail</span>
+                <a href="mailto:hemantchaudharyfz@gmail.com">hemantchaudharyfz@gmail.com</a>
+                &nbsp;|&nbsp;
+                <span class="icon material-symbols-outlined">alternate_email</span>
+                <a href="https://www.instagram.com/hemant.chaudhary.fazilpur/" target="_blank">@hemant.chaudhary.fazilpur</a>
+            </span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./data/data.js"></script>  
+    <script src="script.js"></script>
+    <script src="components/typingTest.js"></script>
+    <script src="components/keyboard.js"></script>
+    <script src="components/resultTest.js"></script>
+    <script>app.mount("#app")</script>
+    <h5>https://www.instagram.com/hemant.chaudhary.fazilpur/</h5>
+    <h6>Email :hemantchaudharyfz@gmail.com</h6>
+</body>
+</html>
